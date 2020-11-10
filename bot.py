@@ -11,15 +11,14 @@ def api_authorize():
 def send_tweet(): 
     api = api_authorize()
     
-    hashtag = '#junjiito #drawing'
+    hashtag = '#shopsmallbusiness'
     tweets_count = 5
     
-    tweets = tweepy.Cursor(api.search, hashtag).items(tweets_count) #since_id=read_last_seen(FILE_NAME)
+    tweets = tweepy.Cursor(api.search, hashtag).items(tweets_count)
     
     for tweet in tweets:
         try:
             api.retweet(tweet.id)
-            # store_last_seen(FILE_NAME,  tweet.id)
             time.sleep(2)
         except tweepy.TweepError as e:
             print(e.reason)
